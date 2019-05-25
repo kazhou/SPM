@@ -87,21 +87,38 @@ def add_prompt():
     return answers
 
 def delete_prompt():
+    choices = act.config_as_choices()
+    choices.append({"name": "Go back", "value": 0})
     del_prompt = {
         'type': 'list',
         'name': 'id',
         'message': 'Which project do you want to delete?',
-        'choices': act.config_as_choices()
+        'choices': choices
     }
     answers = prompt(del_prompt, style=custom_style_1)
     return answers["id"]
 
 def edit_prompt():
+    choices = act.config_as_choices()
+    choices.append({"name": "Go back", "value": 0})
     edit_prompt = {
         'type': 'list',
         'name': 'id',
         'message': 'Which project do you want to edit?',
-        'choices': act.config_as_choices()
+        'choices': choices
+    }
+    answers = prompt(edit_prompt, style=custom_style_1)
+    return answers["id"]
+
+def edit_menu():
+    # start, mark as complete, change description,
+    edit_prompt = {
+        'type': 'list',
+        'name': 'id',
+        'message': 'What edits do you want to make?',
+        'choices': [{"name": "Start project", "value":1},
+                    {"name": "Mark as complete", "value":2},
+                    {"name": "Go back", "value":0}]
     }
     answers = prompt(edit_prompt, style=custom_style_1)
     return answers["id"]
@@ -121,7 +138,7 @@ def main_menu():
     elif action == "Update":
         update()
     else:
-        print("Bye bye!")
+        pp.pprint_magenta("Bye bye!")
 
 
 def view():
@@ -141,6 +158,7 @@ def view():
         print("Invalid option!")
         view()
 
+
 def update():
     action = ask_update()
     if action == 1: # "Add project"
@@ -148,17 +166,39 @@ def update():
         act.add_project(new_proj)
         update()
     elif action == 2: # "Edit project":
-        edit_prompt()
+        ask_edit()
+        update()
     elif action == 3: # "Delete project":
         del_id = delete_prompt()
-        print(del_id)
-        act.delete_project(del_id)
+        if del_id != 0:
+            act.delete_project(del_id)
         update()
     elif action == 0:
         main()
     else:
         print("Invalid option!")
         update()
+
+def ask_edit():
+    edit_id = edit_prompt()
+    if edit_id != 0:
+        edit_option = edit_menu()
+        if edit_option == 1: #start
+            started = act.start_project(edit_id)
+            if started == -1:
+                pp.pprint_text("Project already started!")
+            else:
+                pp.pprint_text("Project started!")
+        elif edit_option == 2:  #finish
+            completed = act.finish_project(edit_id)
+            if completed == 0:
+                pp.pprint_text("Project complete!")
+            else:
+                pp.pprint_text("Project could not be completed.")
+        elif edit_option == 0: #go back
+            ask_edit()
+        else:
+            print("Invalid option!")
 
 if __name__ == '__main__':
     print(chr(27) + "[2J")

@@ -33,7 +33,7 @@
             "id": "p28",
             "title": "Tic Tac Toe",
             "desc": "make tic tac toe ai",
-            "status": "not started",
+            "status": "complete",
             "skills": "python,ai"
         }
     ]

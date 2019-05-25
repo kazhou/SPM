@@ -75,7 +75,29 @@ class Activity(object):
             del self.not_started[id]
         if id in self.complete:
             del self.complete[id]
-        self.write_json()    
+        self.write_json()
+
+    def start_project(self, id):
+        print(id)
+        if id not in self.not_started:
+            return -1
+        p = self.projects[id]
+        p.set_status("in progress")
+        self.in_progress[id] = p
+        del self.not_started[id]
+        self.write_json()
+        return 0
+
+    def finish_project(self, id):
+        if id not in self.in_progress:
+            return -1
+        p = self.projects[id]
+        p.set_status("complete")
+        self.complete[id] = p
+        del self.in_progress[id]
+        self.write_json()
+        return 0
+
 
     def print_projects(self, mode):
         """ mode  - list, all, status"""
@@ -137,10 +159,10 @@ class Project(object):
     def get_skills(self):
         return self.skills
 
+    def set_status(self, st):
+        #TODO check valid status?
+        self.status = st
+
     def to_dict(self):
         return {"id": self.id, "title":self.title, "desc": self.desc,
         "status": self.status, "skills": self.skills}
-
-
-# act = Activity()
-# print(act.in_progress, act.not_started, act.complete, act.projects)

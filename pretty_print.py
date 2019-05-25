@@ -1,10 +1,5 @@
 from colorama import init, Fore, Back, Style
 init(convert=True)
-# print(Fore.RED + 'some red text')
-# print(Back.GREEN + 'and with a green background')
-# print(Style.DIM + 'and in dim text')
-# print(Style.RESET_ALL)
-# print('back to normal now')
 
 def pprint_headings(text):
     print(Fore.CYAN+text)
@@ -20,4 +15,8 @@ def pprint_red(text):
 
 def pprint_blue(text):
     print(Fore.BLUE+text)
+    print(Style.RESET_ALL)
+
+def pprint_magenta(text):
+    print(Fore.MAGENTA+text)
     print(Style.RESET_ALL)
