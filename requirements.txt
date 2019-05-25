@@ -1,0 +1,10 @@
+certifi==2019.3.9
+colorama==0.4.1
+prompt-toolkit==1.0.14
+Pygments==2.4.1
+PyInquirer==1.0.3
+regex==2019.4.14
+six==1.12.0
+termcolor==1.1.0
+wcwidth==0.1.7
+wincertstore==0.2
