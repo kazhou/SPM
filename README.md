@@ -8,7 +8,7 @@ SPM works on both MacOS terminal and Windows command prompt (but is prettier on 
 ### Usage
 First, ensure that you have all the dependencies denoted in `requirements.txt`. Download the project and open the terminal/command line in the project folder. 
 
-Note: on Windows, set the font of the command prompt window to `Lucida Console` font, due to issues with displaying UTF-8 symbols with PyInquirer.
+Note: due to issues with displaying UTF-8 symbols with PyInquirer on Windows, set the font of the command prompt window to `Lucida Console` and run `chcp 65001` before running the CLI.
 
 To run the CLI:
 ```bash
