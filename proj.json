@@ -33,8 +33,21 @@
             "id": "p28",
             "title": "Tic Tac Toe",
             "desc": "make tic tac toe ai",
-            "status": "complete",
-            "skills": "python,ai"
+            "status": "not started",
+            "skills": [
+                "python",
+                "ai"
+            ]
+        },
+        {
+            "id": "p59",
+            "title": "Titanic",
+            "desc": "dataaa",
+            "status": "not started",
+            "skills": [
+                "python",
+                "data science"
+            ]
         }
     ]
 }

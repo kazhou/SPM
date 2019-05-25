@@ -147,7 +147,7 @@ def view():
         act.print_projects("list")
         view()
     elif action == 2: # descriptions
-        print("TODO")
+        act.print_projects("all")
         view()
     elif action == 3: # status
         act.print_projects("status")

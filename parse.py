@@ -62,6 +62,8 @@ class Activity(object):
             id = "p"+str(random.randrange(100))
         new_proj["id"] = id
         new_proj["status"] = "not started"
+        skills = new_proj["skills"].split(",")
+        new_proj["skills"] = skills
         p = Project(new_proj)
         self.projects[id] = p
         self.not_started[id] = p
@@ -109,7 +111,9 @@ class Activity(object):
         elif mode == "all":
             pp.pprint_headings("\nAll project details:")
             for p in self.projects.values():
-                pp.pprint_text(" > "+p.get_title() + " - " + p.get_desc())
+                pp.pprint_text(" > "+p.get_title() + " - " + p.get_desc()
+                + " | " + p.get_status().upper() + "\n"
+                + "    > Skills - " + ", ".join(p.get_skills()))
         elif mode == "status":
             pp.pprint_headings("\nProjects by status:")
             pp.pprint_headings("In progress:")
