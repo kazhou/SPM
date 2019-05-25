@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+# Note: on Windows, use Lucida Console font and
+# run chcp 65001 from the command line
+
 from __future__ import print_function, unicode_literals
 
 import regex
@@ -10,6 +13,8 @@ from PyInquirer import Validator, ValidationError
 from examples import custom_style_3, custom_style_2, custom_style_1
 
 import parse
+import pretty_print as pp
+
 
 class NumberValidator(Validator):
     def validate(self, document):
@@ -39,9 +44,9 @@ def ask_view():
         'type': 'list',
         'name': 'action',
         'message': 'Select view:',
-        'choices': [{'name': 'View all', 'value': 1},
-                    {'name': 'View by status', 'value': 2},
-                    {'name': 'View by skills', 'value': 3},
+        'choices': [{'name': 'View list', 'value': 1},
+                    {'name': 'View all details', 'value': 2},
+                    {'name': 'View by status', 'value': 3},
                     {'name': 'Go back', 'value': 0}]
     }
     answers = prompt(view_prompt, style=custom_style_1)
@@ -65,7 +70,7 @@ def ask_update():
 # Prompt function calls
 
 def main():
-    print("Welcome to Side Project Selector!")
+    print("\nMain menu:")
     main_menu()
 
 
@@ -82,13 +87,15 @@ def main_menu():
 
 def view():
     action = ask_view()
-    if action == 1:  # all
-        pass
-        #view()
-    elif action == 2: # status
-        pass
-    elif action == 3: # skills
-        pass
+    if action == 1:  # list
+        act.print_projects("list")
+        view()
+    elif action == 2: # descriptions
+        print("TODO")
+        view()
+    elif action == 3: # status
+        act.print_projects("status")
+        view()
     elif action == 0:
         main()
     else:
@@ -110,5 +117,7 @@ def update():
         update()
 
 if __name__ == '__main__':
+    print(chr(27) + "[2J")
     act = parse.Activity()
+    pp.pprint_headings("Welcome to Side Project Selector!")
     main()

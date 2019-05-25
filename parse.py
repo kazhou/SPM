@@ -1,10 +1,13 @@
 import json
+import pretty_print as pp
 
 class Activity(object):
     """ Class for activity as parsed from JSON file
 
     Attributes:
-        current : a list of ids of current projects
+        in_progress : a list of ids of projects in progress
+        not_started : a list of ids of projects that have not started
+        complete : a list of ids of projects that are complete
         projects : a dictionary of projects, key = id, value = Project object
 
     """
@@ -20,8 +23,6 @@ class Activity(object):
         with open(r"proj.json") as j:
             proj = json.load(j)
 
-        # self.current = proj["current"] # TODO don't need this
-
         for p in proj["projects"]:
             key = p["id"]
             self.projects[key] = Project(p)
@@ -34,8 +35,30 @@ class Activity(object):
             else:
                 print("Invalid status")
 
-    def print_projects(self):
-        pass
+    def print_projects(self, mode):
+        """ mode  - list, all, status"""
+        if mode == "list":
+            pp.pprint_headings("\nList of projects:")
+            for p in self.projects.values():
+                pp.pprint_text(" > "+p.get_title() + " - " + p.get_desc())
+            # print("\n")
+        elif mode == "all":
+            pp.pprint_headings("\nAll project details:")
+            for p in self.projects.values():
+                pp.pprint_text(" > "+p.get_title() + " - " + p.get_desc())
+        elif mode == "status":
+            pp.pprint_headings("\nProjects by status:")
+            pp.pprint_headings("In progress:")
+            for p in self.in_progress.values():
+                pp.pprint_text(" > "+p.get_title())
+            pp.pprint_headings("Not started:")
+            for p in self.not_started.values():
+                pp.pprint_text(" > "+p.get_title())
+            pp.pprint_headings("Complete:")
+            for p in self.complete.values():
+                pp.pprint_text(" > "+p.get_title())
+        else:
+            print("Invalid mode")
 
 
 class Project(object):

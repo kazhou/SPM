@@ -1,10 +1,9 @@
 {
-  "current": [],
   "projects": [
     {
     "id": "p0",
     "title": "SPG CLI",
-    "desc": "blah",
+    "desc": "blah blah",
     "status": "in progress",
     "skills":["python", "cli"]
   },
@@ -18,7 +17,7 @@
   {
     "id": "p2",
     "title": "askyquiz",
-    "desc": "blah",
+    "desc": "blah blah blah",
     "status": "complete",
     "skills":["ocaml"]
   }
