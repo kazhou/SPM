@@ -2,8 +2,8 @@
     "projects": [
         {
             "id": "p0",
-            "title": "SPG CLI",
-            "desc": "blah blah",
+            "title": "SPM CLI",
+            "desc": "python cli",
             "status": "in progress",
             "skills": [
                 "python",
@@ -12,8 +12,8 @@
         },
         {
             "id": "p1",
-            "title": "SPG Flask",
-            "desc": "blah",
+            "title": "SPM Flask",
+            "desc": "try to make a Flask version of SPM",
             "status": "in progress",
             "skills": [
                 "python",
@@ -22,26 +22,26 @@
         },
         {
             "id": "p2",
-            "title": "askyquiz",
-            "desc": "blah blah blah",
+            "title": "musicAI",
+            "desc": "taylor swift (and others) ai!",
             "status": "complete",
             "skills": [
-                "ocaml"
+                "python"
             ]
         },
         {
             "id": "p28",
-            "title": "Tic Tac Toe",
-            "desc": "make tic tac toe ai",
+            "title": "Task To Do",
+            "desc": "other random side project to do!",
             "status": "not started",
             "skills": [
-                "python",
-                "ai"
+                "ocaml",
+                "coq"
             ]
         },
         {
             "id": "p59",
-            "title": "Titanic",
+            "title": "kaggle",
             "desc": "dataaa",
             "status": "not started",
             "skills": [
