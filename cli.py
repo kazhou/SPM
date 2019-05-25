@@ -33,7 +33,7 @@ def ask_main():
         'type': 'list',
         'name': 'action',
         'message': 'Select an action:',
-        'choices': ['View', 'Update', 'Quit']
+        'choices': ['View', 'Update', 'Select', 'Quit']
     }
     answers = prompt(main_prompt, style=custom_style_1)
     return answers['action']
@@ -123,6 +123,21 @@ def edit_menu():
     answers = prompt(edit_prompt, style=custom_style_1)
     return answers["id"]
 
+def select_prompt():
+    select_prompt = {
+        'type': 'list',
+        'name': 'action',
+        'message': 'Select an method of picking what to work on:',
+        'choices': [{"name": "Random unfinished", "value":1},
+                    {"name": "Finish in progress", "value":2},
+                    {"name": "Start new", "value":3},
+                    {"name": "Random by skill", "value":4},
+                    {"name": "Go back", "value":0}]
+    }
+    answers = prompt(select_prompt, style=custom_style_1)
+    return answers['action']
+
+
 # Prompt function calls
 
 def main():
@@ -137,6 +152,8 @@ def main_menu():
         view()
     elif action == "Update":
         update()
+    elif action == "Select":
+        select()
     else:
         pp.pprint_magenta("Bye bye!")
 
@@ -159,16 +176,51 @@ def view():
         view()
 
 
+def select():
+    action = select_prompt()
+    if action == 1: #random unfinished
+        proj = act.select_incomplete()
+        if proj is None:
+            pp.pprint_text("You have no incomplete side projects!")
+        else:
+            pp.pprint_text("Try working on:")
+            pp.pprint_magenta("\t"+proj.get_title() +"!")
+        select()
+    elif action == 2: # random in in_progress
+        proj = act.select_in_progress()
+        if proj is None:
+            pp.pprint_text("You have no side projects in progress!")
+        else:
+            pp.pprint_text("Try working on:")
+            pp.pprint_magenta("\t"+proj.get_title() +"!")
+        select()
+    elif action == 3: # random new
+        proj = act.select_not_started()
+        if proj is None:
+            pp.pprint_text("You have no unstarted side projects!")
+        else:
+            pp.pprint_text("Try working on:")
+            pp.pprint_magenta("\t"+proj.get_title() +"!")
+        select()
+    elif action == 4: # random by skills
+        print("TODO")
+        select()
+    elif action == 0:
+        main()
+    else:
+        print("Invalid option!")
+        select()
+
 def update():
     action = ask_update()
     if action == 1: # "Add project"
         new_proj = add_prompt()
         act.add_project(new_proj)
         update()
-    elif action == 2: # "Edit project":
+    elif action == 2: # "Edit project"
         ask_edit()
         update()
-    elif action == 3: # "Delete project":
+    elif action == 3: # "Delete project"
         del_id = delete_prompt()
         if del_id != 0:
             act.delete_project(del_id)
@@ -178,6 +230,7 @@ def update():
     else:
         print("Invalid option!")
         update()
+
 
 def ask_edit():
     edit_id = edit_prompt()
@@ -200,8 +253,9 @@ def ask_edit():
         else:
             print("Invalid option!")
 
+
 if __name__ == '__main__':
     print(chr(27) + "[2J")
     act = parse.Activity()
-    pp.pprint_headings("Welcome to Side Project Selector!")
+    pp.pprint_headings("Welcome to Side Project Manager!")
     main()

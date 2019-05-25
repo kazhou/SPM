@@ -100,6 +100,28 @@ class Activity(object):
         self.write_json()
         return 0
 
+    def select_incomplete(self):
+        unfinished = {**self.not_started, **self.in_progress}
+        # print(unfinished)
+        seq = list(unfinished.keys())
+        if len(seq) == 0:
+            return None
+        choice = random.choice(seq)
+        return self.projects[choice]
+
+    def select_in_progress(self):
+        seq = list(self.in_progress.keys())
+        if len(seq) == 0:
+            return None
+        choice = random.choice(seq)
+        return self.projects[choice]
+
+    def select_not_started(self):
+        seq = list(self.not_started.keys())
+        if len(seq) == 0:
+            return None
+        choice = random.choice(seq)
+        return self.projects[choice]
 
     def print_projects(self, mode):
         """ mode  - list, all, status"""
