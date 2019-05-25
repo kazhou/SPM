@@ -14,7 +14,7 @@
             "id": "p1",
             "title": "SPG Flask",
             "desc": "blah",
-            "status": "not started",
+            "status": "in progress",
             "skills": [
                 "python",
                 "flask"

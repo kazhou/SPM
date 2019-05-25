@@ -12,7 +12,7 @@ from PyInquirer import Validator, ValidationError
 
 from examples import custom_style_3, custom_style_2, custom_style_1
 
-import parse
+import projects
 import pretty_print as pp
 
 
@@ -256,6 +256,6 @@ def ask_edit():
 
 if __name__ == '__main__':
     print(chr(27) + "[2J")
-    act = parse.Activity()
+    act = projects.Activity()
     pp.pprint_headings("Welcome to Side Project Manager!")
     main()

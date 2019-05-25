@@ -21,7 +21,7 @@ class Activity(object):
         self.load_json()
 
     def load_json(self):
-        with open(r"proj.json") as j:
+        with open(r"./data/proj.json") as j:
             proj = json.load(j)
 
         for p in proj["projects"]:
@@ -42,7 +42,7 @@ class Activity(object):
         for p in self.projects.values():
             projects.append(p.to_dict())
         new_json["projects"] = projects
-        with open(r"proj.json", "w") as j:
+        with open(r"./data/proj.json", "w") as j:
             json.dump(new_json, j, indent=4)
 
     def config_as_choices(self):
