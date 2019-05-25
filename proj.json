@@ -1,25 +1,40 @@
 {
-  "projects": [
-    {
-    "id": "p0",
-    "title": "SPG CLI",
-    "desc": "blah blah",
-    "status": "in progress",
-    "skills":["python", "cli"]
-  },
-  {
-    "id": "p1",
-    "title": "SPG Flask",
-    "desc": "blah",
-    "status": "not started",
-    "skills":["python", "flask"]
-  },
-  {
-    "id": "p2",
-    "title": "askyquiz",
-    "desc": "blah blah blah",
-    "status": "complete",
-    "skills":["ocaml"]
-  }
-  ]
+    "projects": [
+        {
+            "id": "p0",
+            "title": "SPG CLI",
+            "desc": "blah blah",
+            "status": "in progress",
+            "skills": [
+                "python",
+                "cli"
+            ]
+        },
+        {
+            "id": "p1",
+            "title": "SPG Flask",
+            "desc": "blah",
+            "status": "not started",
+            "skills": [
+                "python",
+                "flask"
+            ]
+        },
+        {
+            "id": "p2",
+            "title": "askyquiz",
+            "desc": "blah blah blah",
+            "status": "complete",
+            "skills": [
+                "ocaml"
+            ]
+        },
+        {
+            "id": "p28",
+            "title": "Tic Tac Toe",
+            "desc": "make tic tac toe ai",
+            "status": "not started",
+            "skills": "python,ai"
+        }
+    ]
 }

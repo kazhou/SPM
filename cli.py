@@ -66,6 +66,45 @@ def ask_update():
     answers = prompt(upd_prompt, style=custom_style_1)
     return answers['action']
 
+def add_prompt():
+    add_prompt = [{
+        'type': 'input',
+        'name': 'title',
+        'message': 'Name of the task: ',
+    },
+    {
+        'type': 'input',
+        'name': 'desc',
+        'message': 'Description of the task: ',
+    },
+    {
+        'type': 'input',
+        'name': 'skills',
+        'message': 'List the skills for this project, comma-separated, no spaces: ',
+    }]
+
+    answers = prompt(add_prompt, style=custom_style_1)
+    return answers
+
+def delete_prompt():
+    del_prompt = {
+        'type': 'list',
+        'name': 'id',
+        'message': 'Which project do you want to delete?',
+        'choices': act.config_as_choices()
+    }
+    answers = prompt(del_prompt, style=custom_style_1)
+    return answers["id"]
+
+def edit_prompt():
+    edit_prompt = {
+        'type': 'list',
+        'name': 'id',
+        'message': 'Which project do you want to edit?',
+        'choices': act.config_as_choices()
+    }
+    answers = prompt(edit_prompt, style=custom_style_1)
+    return answers["id"]
 
 # Prompt function calls
 
@@ -104,12 +143,17 @@ def view():
 
 def update():
     action = ask_update()
-    if action == "Add project":
-        pass
-    elif action == "Delete project":
-        pass
-    elif action == "Edit project":
-        pass
+    if action == 1: # "Add project"
+        new_proj = add_prompt()
+        act.add_project(new_proj)
+        update()
+    elif action == 2: # "Edit project":
+        edit_prompt()
+    elif action == 3: # "Delete project":
+        del_id = delete_prompt()
+        print(del_id)
+        act.delete_project(del_id)
+        update()
     elif action == 0:
         main()
     else:

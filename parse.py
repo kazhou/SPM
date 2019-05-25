@@ -1,5 +1,6 @@
 import json
 import pretty_print as pp
+import random
 
 class Activity(object):
     """ Class for activity as parsed from JSON file
@@ -34,6 +35,47 @@ class Activity(object):
                 self.complete[key] = self.projects[key]
             else:
                 print("Invalid status")
+
+    def write_json(self):
+        new_json = {}
+        projects = []
+        for p in self.projects.values():
+            projects.append(p.to_dict())
+        new_json["projects"] = projects
+        with open(r"proj.json", "w") as j:
+            json.dump(new_json, j, indent=4)
+
+    def config_as_choices(self):
+        choices = []
+        for p in self.projects.values():
+            choice = {}
+            choice["name"] = p.get_title()
+            choice["value"] = p.get_id()
+            choices.append(choice)
+        return choices
+
+    def add_project(self, new_proj):
+        # TODO : generate random unqiue id
+        # new_proj already has title, desc, skills
+        id = "p0"
+        while id in self.projects:
+            id = "p"+str(random.randrange(100))
+        new_proj["id"] = id
+        new_proj["status"] = "not started"
+        p = Project(new_proj)
+        self.projects[id] = p
+        self.not_started[id] = p
+        self.write_json()
+
+    def delete_project(self, id):
+        del self.projects[id]
+        if id in self.in_progress:
+            del self.in_progress[id]
+        if id in self.not_started:
+            del self.not_started[id]
+        if id in self.complete:
+            del self.complete[id]
+        self.write_json()    
 
     def print_projects(self, mode):
         """ mode  - list, all, status"""
@@ -94,6 +136,10 @@ class Project(object):
 
     def get_skills(self):
         return self.skills
+
+    def to_dict(self):
+        return {"id": self.id, "title":self.title, "desc": self.desc,
+        "status": self.status, "skills": self.skills}
 
 
 # act = Activity()
